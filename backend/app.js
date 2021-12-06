@@ -7,7 +7,6 @@ const cookieParser = require('cookie-parser');
 const { environment } = require('./config');
 const routes = require('./routes');
 const { ValidationError } = require('sequelize');
-
 const isProduction = environment === 'production';
 
 const app = express();
@@ -16,6 +15,7 @@ app.use(morgan('dev'));
 
 app.use(cookieParser());
 app.use(express.json());
+
 
 // Security Middleware
 if (!isProduction) {
@@ -37,8 +37,10 @@ app.use(
         }
     })
 );
-
-
+app.get("/images/:src", (req, res) => {
+    // console.log(`./images/${req.params.src}`)
+    res.sendFile(`./images/${req.params.src}`, { root: __dirname });
+})
 app.use(routes);
 
 app.use((_req, _res, next) => {
