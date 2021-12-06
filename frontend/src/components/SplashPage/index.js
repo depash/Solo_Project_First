@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import "./SplashPage.css"
 
 
@@ -8,8 +8,14 @@ function SplashPage() {
 
 
     return (
-        <div className="splashPage">
-            <h1>Welcome</h1>
+        <div id="splashPage">
+            <div id="boxContainer">
+                <div id="splashBox">
+                    <h1 id="title">Find your inspiration.</h1>
+                    <h3 className="subTitle">Join the Picturocity community</h3>
+                    <div id="linkContainer"><Link style={{ color: 'black', fontSize: "2rem" }} to="/signup">Start Now</Link></div>
+                </div>
+            </div>
         </div>
     )
 }

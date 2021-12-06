@@ -4,7 +4,12 @@
     height: 100%;
     display: flex;
     flex-direction: column;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    transition: background-image 0.5s ease-in-out;
 }
+
 
 body{margin: 0;}
 
