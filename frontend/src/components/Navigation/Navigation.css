@@ -40,3 +40,8 @@ a{
 .login{
     margin-right: 10px;
 }
+
+#logoutContainer{
+    display: flex;
+    margin: 20px;
+}
