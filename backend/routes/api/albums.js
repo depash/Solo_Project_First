@@ -6,12 +6,23 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { Album } = require("../../db/models")
 const { db } = require('../../config');
+const { picture } = require('../../db/models');
 const router = express.Router();
 
 router.post("/", asyncHandler(async (req, res) => {
     const { albumInfo } = req.body
     const makeAlbum = await Album.create(albumInfo)
     return res.json(makeAlbum);
+}))
+
+router.get("/:id/pics", asyncHandler(async (req, res) => {
+    const albumId = req.params.id
+    const pics = await picture.findAll({
+        where: {
+            albumId: albumId
+        }
+    })
+    return res.json(pics)
 }))
 
 router.get("/:username", asyncHandler(async (req, res) => {

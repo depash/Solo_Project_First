@@ -6,9 +6,10 @@ import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
 import SplashPage from "./components/SplashPage";
-import AddPic from "./components/addPicPage";
 import AddAlbum from "./components/addAlbumPage";
 import AllAlbums from "./components/albumsPage";
+import AddPicsPage from "./components/addPicsPage";
+import PicPage from "./components/picsPage";
 
 
 
@@ -48,8 +49,14 @@ function App() {
           <Route path="/addAlbums">
             <AddAlbum />
           </Route>
-          <Route path="/showAlbums">
+          <Route exact path="/albums">
             <AllAlbums />
+          </Route>
+          <Route exact path="/albums/:id">
+            <PicPage />
+          </Route>
+          <Route path="/albums/:id/newPic">
+            <AddPicsPage />
           </Route>
         </Switch>
       )}

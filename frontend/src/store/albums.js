@@ -28,8 +28,8 @@ export const postAlbums = (albumInfo) => async (dispatch) => {
     return response;
 }
 
-export const getAlbums = (userName) => async (dispatch) => {
-    const response = await csrfFetch(`api/albums/${userName}`)
+export const getAlbums = (id) => async (dispatch) => {
+    const response = await csrfFetch(`api/albums/${id}`)
     const albums = await response.json()
     dispatch(loadAlbums(albums))
     return response
