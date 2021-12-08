@@ -18,7 +18,7 @@ function AddAlbum() {
             description,
             userId: sessionUser.id
         }
-        history.push(`/showAlbums`);
+        history.push(`/albums`);
         return dispatch(postAlbums(payload))
     }
     return (

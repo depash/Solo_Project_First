@@ -38,7 +38,9 @@ app.use(
     })
 );
 app.get("/images/:src", (req, res) => {
-    // console.log(`./images/${req.params.src}`)
+    res.sendFile(`./images/${req.params.src}`, { root: __dirname });
+})
+app.get("/albums/images/:src", (req, res) => {
     res.sendFile(`./images/${req.params.src}`, { root: __dirname });
 })
 app.use(routes);

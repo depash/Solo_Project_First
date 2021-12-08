@@ -22,7 +22,7 @@ function Navigation({ isLoaded }) {
     }
     useEffect(() => {
         if (sessionUser) {
-            setLogedIn("/showAlbums")
+            setLogedIn("/albums")
         }
         else {
             setLogedIn("/")
