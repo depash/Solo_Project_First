@@ -29,25 +29,24 @@ export const postPics = (PicInfo) => async (dispatch) => {
 }
 
 export const getPics = (albumId) => async (dispatch) => {
-    const response = await csrfFetch(`api/albums/${albumId}/pics`)
+    const response = await csrfFetch(`/api/albums/${albumId}/pics`)
     const pics = await response.json()
     dispatch(loadPics(pics))
     return response
 }
 
-const initialState = {};
+const initialState = { pic: {} };
 
 const picReducer = (state = initialState, action) => {
     switch (action.type) {
-        case LOAD_PICS:
-            const allPics = {}
-            action.pics.forEach(element => {
-                allPics[element.id] = element
+        case LOAD_PICS: {
+            const newState = { ...state, pic: {} };
+            action.picture.forEach((element) => {
+                newState.pic[element.id] = element;
             });
-            return {
-                ...state,
-                ...allPics
-            };
+            return newState;
+        }
+
         case CREATE_PICS:
             const newState = {
                 ...state,

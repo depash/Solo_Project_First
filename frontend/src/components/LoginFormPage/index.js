@@ -12,7 +12,7 @@ function LoginFormPage() {
     const [errors, setErrors] = useState([]);
 
     if (sessionUser) return (
-        <Redirect to="/addAlbums" />
+        <Redirect to="/albums" />
     );
 
     const handleSubmit = (e) => {

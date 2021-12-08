@@ -1,0 +1,19 @@
+.Pics{
+    width: 140px;
+    height: 140px;
+}
+#PicsPage{
+    display: flex;
+}
+.picContainer{
+    display: flex;
+    flex-direction: column;
+}
+#addPicButton{
+    width: 140px;
+    height: 140px;
+}
+.Plus-Icon{
+    width: 40px;
+    height: 40px;
+}

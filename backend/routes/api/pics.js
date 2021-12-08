@@ -6,12 +6,13 @@ const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const { Album } = require("../../db/models")
 const { db } = require('../../config');
-const picture = require('../../db/models/picture');
+const { picture } = require('../../db/models');
 const router = express.Router();
 
 router.post("/", asyncHandler(async (req, res) => {
-    const { picInfo } = req.body
-    const makePic = await picture.create(picInfo)
+    const { PicInfo } = req.body
+    console.log(PicInfo)
+    const makePic = await picture.create(PicInfo)
     return res.json(makePic);
 }))
 

@@ -10,7 +10,7 @@ module.exports = {
       },
       picture: {
         allowNull: false,
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       userId: {
         onDelete: 'CASCADE',

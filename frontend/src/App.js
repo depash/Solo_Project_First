@@ -8,7 +8,7 @@ import Navigation from "./components/Navigation";
 import SplashPage from "./components/SplashPage";
 import AddAlbum from "./components/addAlbumPage";
 import AllAlbums from "./components/albumsPage";
-import SingleAlbums from "./components/singleAlbum";
+import AddPicsPage from "./components/addPicsPage";
 import PicPage from "./components/picsPage";
 
 
@@ -53,10 +53,10 @@ function App() {
             <AllAlbums />
           </Route>
           <Route exact path="/albums/:id">
-            <SingleAlbums />
-          </Route>
-          <Route path="albums/:id/pics">
             <PicPage />
+          </Route>
+          <Route path="/albums/:id/newPic">
+            <AddPicsPage />
           </Route>
         </Switch>
       )}

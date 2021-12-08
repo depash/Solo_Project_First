@@ -5,20 +5,20 @@ import { useHistory } from 'react-router-dom';
 import { useState } from 'react';
 import { postPics } from '../../store/pics';
 
-function SingleAlbums() {
+function AddPicsPage() {
     const sessionUser = useSelector(state => state.session.user);
     const params = useParams();
     const dispatch = useDispatch()
     const history = useHistory()
-    const [url, setUrl] = useState('');
+    const [picture, setPicture] = useState('');
     const handleSubmit = (e) => {
         e.preventDefault();
         const payload = {
-            url,
+            picture,
             albumId: params.id,
             userId: sessionUser.id
         }
-        history.push(`/albums/${params.id}/pics`);
+        history.push(`/albums/${params.id}`);
         dispatch(postPics(payload))
     }
     return (
@@ -27,8 +27,8 @@ function SingleAlbums() {
                 <div>
                     <label>Photo</label>
                     <input placeholder="URL"
-                        onChange={(e) => { setUrl(e.target.value) }}
-                        value={url}
+                        onChange={(e) => { setPicture(e.target.value) }}
+                        value={picture}
                     ></input>
                 </div>
                 <button type="submit"></button>
@@ -37,4 +37,4 @@ function SingleAlbums() {
     )
 }
 
-export default SingleAlbums;
+export default AddPicsPage;
