@@ -5,8 +5,12 @@ import LoginFormPage from "./components/LoginFormPage";
 import SignupFormPage from "./components/SignupFormPage";
 import * as sessionActions from "./store/session";
 import Navigation from "./components/Navigation";
-import SplashPage from "./components/SplashPage"
-import addPic from "./components/addPicPage"
+import SplashPage from "./components/SplashPage";
+import AddPic from "./components/addPicPage";
+import AddAlbum from "./components/addAlbumPage";
+import AllAlbums from "./components/albumsPage";
+
+
 
 function App() {
   const dispatch = useDispatch();
@@ -32,7 +36,7 @@ function App() {
       <Navigation isLoaded={isLoaded} />
       {isLoaded && (
         <Switch>
-          <Route path="/" exact>
+          <Route exact path="/" >
             <SplashPage />
           </Route>
           <Route path="/login">
@@ -41,8 +45,11 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route path="/addPic">
-            <addPic />
+          <Route path="/addAlbums">
+            <AddAlbum />
+          </Route>
+          <Route path="/showAlbums">
+            <AllAlbums />
           </Route>
         </Switch>
       )}

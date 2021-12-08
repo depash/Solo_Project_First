@@ -1,17 +1,21 @@
-import React, { useState } from 'react';
-import * as sessionActions from '../../store/session';
-import { useDispatch, useSelector } from 'react-redux';
-import { Redirect } from 'react-router-dom';
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import './addPic.css';
 
-function addPic() {
-
+function AddPic() {
+    const sessionUser = useSelector(state => state.session.user);
     return (
         <div>
-            <h1>
-                helooooooooooooooo
-            </h1>
+            <form >
+                <div>
+                    <label>Picture url</label>
+                    <input placeholder="url"></input>
+                </div>
+                <button type="submit"></button>
+            </form>
         </div>
     )
 }
 
-export default addPic;
+export default AddPic;
