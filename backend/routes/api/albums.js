@@ -14,4 +14,19 @@ router.post("/", asyncHandler(async (req, res) => {
     return res.json(makeAlbum);
 }))
 
+router.get("/:username", asyncHandler(async (req, res) => {
+    const username = req.params.username
+    const users = await User.findOne({
+        where: {
+            username
+        }
+    })
+    const albums = await Album.findAll({
+        where: {
+            userId: users.id
+        }
+    })
+    return res.json(albums)
+}))
+
 module.exports = router;

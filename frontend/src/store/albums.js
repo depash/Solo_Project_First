@@ -29,17 +29,25 @@ export const postAlbums = (albumInfo) => async (dispatch) => {
 }
 
 export const getAlbums = (userName) => async (dispatch) => {
-    const response = await csrfFetch(`api/albums/${userName}`, {})
-    const albums = response.json()
+    const response = await csrfFetch(`api/albums/${userName}`)
+    const albums = await response.json()
     dispatch(loadAlbums(albums))
     return response
 }
 
-const initialState = { albums: {} };
+const initialState = {};
 
 const albumReducer = (state = initialState, action) => {
-    let newState;
     switch (action.type) {
+        case LOAD_ALBUMS:
+            const allAlbums = {}
+            action.albums.forEach(element => {
+                allAlbums[element.id] = element
+            });
+            return {
+                ...state,
+                ...allAlbums
+            };
         case CREATE_ABLUMS:
             const newState = {
                 ...state,
