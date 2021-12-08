@@ -12,7 +12,6 @@ function ProfileButton({ user }) {
         e.preventDefault();
         dispatch(sessionActions.logout());
     };
-
     return (
         <>
             <div id="logoutContainer">

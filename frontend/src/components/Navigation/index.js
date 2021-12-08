@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
@@ -6,7 +6,7 @@ import './Navigation.css';
 
 function Navigation({ isLoaded }) {
     const sessionUser = useSelector(state => state.session.user);
-
+    const [LogedIn, setLogedIn] = useState("/")
     let sessionLinks;
     if (sessionUser) {
         sessionLinks = (
@@ -20,6 +20,14 @@ function Navigation({ isLoaded }) {
             </>
         );
     }
+    useEffect(() => {
+        if (sessionUser) {
+            setLogedIn("/showAlbums")
+        }
+        else {
+            setLogedIn("/")
+        }
+    }, [sessionUser])
 
     return (
         <div className="navDiv">
@@ -28,7 +36,7 @@ function Navigation({ isLoaded }) {
                     <li>
                         <div className="links">
                             <div className="logo">
-                                <NavLink exact to="/">Picturocity</NavLink>
+                                <NavLink exact to={`${LogedIn}`}>Picturocity</NavLink>
                             </div>
                             <div class="login">
                                 {isLoaded && sessionLinks}
