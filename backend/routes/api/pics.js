@@ -16,5 +16,11 @@ router.post("/", asyncHandler(async (req, res) => {
     return res.json(makePic);
 }))
 
+router.delete("/:id", asyncHandler(async (req, res) => {
+    const id = req.params.id
+    const pic = await picture.findByPk(id)
+    await pic.destroy()
+    return res.json(pic)
+}))
 
 module.exports = router;
