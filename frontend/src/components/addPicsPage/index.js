@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import './singleAlbums.css';
 import { useHistory } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { postPics } from '../../store/pics';
 
 function AddPicsPage() {
@@ -10,7 +10,16 @@ function AddPicsPage() {
     const params = useParams();
     const dispatch = useDispatch()
     const history = useHistory()
-    const [picture, setPicture] = useState('');
+    const [picture, setPicture] = useState("");
+    const [errors, setErrors] = useState(false)
+    useEffect(() => {
+        if (picture === "") {
+            setErrors(true)
+        }
+        else {
+            setErrors(false)
+        }
+    }, [picture])
     const handleSubmit = async (e) => {
         e.preventDefault();
         const payload = {
@@ -18,11 +27,14 @@ function AddPicsPage() {
             albumId: params.id,
             userId: sessionUser.id
         }
-        await dispatch(postPics(payload))
-        history.push(`/albums/${params.id}`);
+        if (!errors) {
+            await dispatch(postPics(payload))
+            history.push(`/albums/${params.id}`);
+        }
     }
     return (
         <div>
+            {errors && <h3>please Enter a url</h3>}
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>Photo</label>
