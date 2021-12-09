@@ -8,14 +8,13 @@ import { PlusIcon } from "@heroicons/react/outline"
 
 function PicPage() {
     const sessionUser = useSelector((state) => state.session.user);
-
     const params = useParams();
     const dispatch = useDispatch()
     const history = useHistory();
     useEffect(() => {
         dispatch(getPics(params.id))
     }, [dispatch])
-    const pics = useSelector(state => state.pic.pic)
+    const pics = useSelector(state => ({ ...state.pic.pic }))
     // console.log(pics)
     const list = []
 
@@ -26,9 +25,7 @@ function PicPage() {
         }
         list.push(<div class="picContainer"><img className="Pics" src={pics[pic].picture}></img>{loggedIn && <button>Delete</button>}</div>)
     }
-    useEffect(() => {
 
-    }, [pics])
     const onClickHandler = () => {
         history.push(`/albums/${params.id}/newPic`);
     }

@@ -11,15 +11,15 @@ function AddPicsPage() {
     const dispatch = useDispatch()
     const history = useHistory()
     const [picture, setPicture] = useState('');
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         const payload = {
             picture,
             albumId: params.id,
             userId: sessionUser.id
         }
+        await dispatch(postPics(payload))
         history.push(`/albums/${params.id}`);
-        dispatch(postPics(payload))
     }
     return (
         <div>

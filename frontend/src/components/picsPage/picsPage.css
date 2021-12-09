@@ -4,10 +4,12 @@
 }
 #PicsPage{
     display: flex;
+    flex-wrap: wrap;
 }
 .picContainer{
     display: flex;
     flex-direction: column;
+
 }
 #addPicButton{
     width: 140px;

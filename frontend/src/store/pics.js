@@ -2,6 +2,7 @@ import { csrfFetch } from './csrf';
 
 const CREATE_PICS = "pics/createPics"
 const LOAD_PICS = "pics/loadPics"
+const DELETE_PICS = "pics/deletePics"
 
 const createPic = (picture) => {
     return {
@@ -14,6 +15,11 @@ const loadPics = (picture) => {
         type: LOAD_PICS,
         picture
     }
+}
+
+const DeletePics = (picture) => {
+    return DELETE_PICS,
+        picture
 }
 
 export const postPics = (PicInfo) => async (dispatch) => {
