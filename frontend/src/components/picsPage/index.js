@@ -26,6 +26,9 @@ function PicPage() {
         }
         list.push(<div class="picContainer"><img className="Pics" src={pics[pic].picture}></img>{loggedIn && <button>Delete</button>}</div>)
     }
+    useEffect(() => {
+
+    }, [pics])
     const onClickHandler = () => {
         history.push(`/albums/${params.id}/newPic`);
     }
