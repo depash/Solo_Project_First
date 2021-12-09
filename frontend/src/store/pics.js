@@ -18,8 +18,10 @@ const loadPics = (picture) => {
 }
 
 const DeletePics = (picture) => {
-    return DELETE_PICS,
+    return {
+        type: DELETE_PICS,
         picture
+    }
 }
 
 export const postPics = (PicInfo) => async (dispatch) => {
@@ -41,14 +43,25 @@ export const getPics = (albumId) => async (dispatch) => {
     return response
 }
 
-const initialState = { pic: {} };
+export const deletePics = (picId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/pics/${picId}`, {
+        method: "DELETE"
+    })
+    if (response.ok) {
+        const deletedPic = await response.json()
+        dispatch(DeletePics(deletedPic))
+        return response;
+    }
+}
+
+const initialState = {};
 
 const picReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_PICS: {
-            const newState = { ...state, pic: {} };
+            const newState = { ...state };
             action.picture.forEach((element) => {
-                newState.pic[element.id] = element;
+                newState[element.id] = element;
             });
             return newState;
         }
@@ -56,9 +69,14 @@ const picReducer = (state = initialState, action) => {
         case CREATE_PICS:
             const newState = {
                 ...state,
-                [action.id]: action.Pic
+                [action.picture.id]: action.picture
             };
             return newState
+        case DELETE_PICS: {
+            const newState = { ...state }
+            delete newState[action.picture.id];
+            return newState
+        }
         default:
             return state
     }

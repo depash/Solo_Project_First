@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import './picsPage.css';
 import { useHistory, useParams } from 'react-router';
-import { getPics } from '../../store/pics';
+import { deletePics, getPics } from '../../store/pics';
 import { PlusIcon } from "@heroicons/react/outline"
 
 function PicPage() {
@@ -11,20 +11,12 @@ function PicPage() {
     const params = useParams();
     const dispatch = useDispatch()
     const history = useHistory();
-    useEffect(() => {
-        dispatch(getPics(params.id))
+    useEffect(async () => {
+        await dispatch(getPics(params.id))
     }, [dispatch])
-    const pics = useSelector(state => ({ ...state.pic.pic }))
-    // console.log(pics)
-    const list = []
-
-    for (const pic in pics) {
-        let loggedIn = false
-        if (pics[pic].userId === sessionUser.id) {
-            loggedIn = true
-        }
-        list.push(<div class="picContainer"><img className="Pics" src={pics[pic].picture}></img>{loggedIn && <button>Delete</button>}</div>)
-    }
+    const picsObj = useSelector(state => ({ ...state.pic }))
+    console.log(picsObj)
+    const pics = Object.values(picsObj)
 
     const onClickHandler = () => {
         history.push(`/albums/${params.id}/newPic`);
@@ -38,8 +30,9 @@ function PicPage() {
                 </button>
             </div>
             {
-                list
-
+                pics.map(({ picture, id }, i) => (
+                    <div key={i} class="picContainer"><img className="Pics" src={picture}></img>{<button id={id} onClick={() => { dispatch(deletePics(id)) }}>Delete</button>}</div>
+                ))
             }
         </div>
     )
