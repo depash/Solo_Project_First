@@ -3,6 +3,7 @@ import { csrfFetch } from './csrf';
 const CREATE_PICS = "pics/createPics"
 const LOAD_PICS = "pics/loadPics"
 const DELETE_PICS = "pics/deletePics"
+const EDIT_PICS = "pics/editPics"
 
 const createPic = (picture) => {
     return {
@@ -20,6 +21,13 @@ const loadPics = (picture) => {
 const DeletePics = (picture) => {
     return {
         type: DELETE_PICS,
+        picture
+    }
+}
+
+const editPic = (picture) => {
+    return {
+        type: EDIT_PICS,
         picture
     }
 }
@@ -54,6 +62,18 @@ export const deletePics = (picId) => async (dispatch) => {
     }
 }
 
+export const putPics = (picId, PicInfo) => async (dispatch) => {
+    const response = await csrfFetch(`/api/pics/${picId}`, {
+        method: "PUT",
+        body: JSON.stringify({
+            PicInfo
+        })
+    })
+    const editedPic = await response.json()
+    dispatch(editPic(editedPic))
+    return response;
+}
+
 const initialState = {};
 
 const picReducer = (state = initialState, action) => {
@@ -76,6 +96,13 @@ const picReducer = (state = initialState, action) => {
             const newState = { ...state }
             delete newState[action.picture.id];
             return newState
+        }
+        case EDIT_PICS: {
+            const newState = {
+                ...state,
+                [action.picture.id]: action.picture
+            }
+            return newState;
         }
         default:
             return state

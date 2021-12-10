@@ -15,7 +15,6 @@ function PicPage() {
         await dispatch(getPics(params.id))
     }, [dispatch])
     const picsObj = useSelector(state => ({ ...state.pic }))
-    console.log(picsObj)
     const pics = Object.values(picsObj)
 
     const onClickHandler = () => {

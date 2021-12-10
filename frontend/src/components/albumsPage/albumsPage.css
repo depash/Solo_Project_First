@@ -1,0 +1,23 @@
+.albumImage{
+    width: 140px;
+    height: 140px;
+    background-color: aqua;
+}
+.albumImage:hover{
+    cursor: pointer;
+}
+
+#albumPageContainer{
+    display: flex;
+    flex-wrap: wrap;
+}
+.IndividualContainer{
+    width: 140px;
+    height: 200px;
+    background-color: azure;
+}
+.titleContainer{
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

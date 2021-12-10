@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import './albumsPage.css';
 import { useHistory } from 'react-router';
 import { Redirect } from 'react-router-dom';
-import { getAlbums, postAlbums } from '../../store/albums';
+import { getAlbums, postAlbums, deleteAlbums } from '../../store/albums';
 import { PlusIcon } from "@heroicons/react/outline"
 
 function AllAlbums() {
@@ -14,25 +14,30 @@ function AllAlbums() {
     useEffect(() => {
         dispatch(getAlbums(sessionUser.username))
     }, [dispatch])
-    const albums = useSelector(state => state.album)
-    const list = []
-    for (const album in albums) {
-        if (sessionUser.id === albums[album].userId) {
-            list.push(<Link to={`/albums/${albums[album].id}`}>{albums[album].title}</Link>)
-        }
-    }
+    const albumsObj = useSelector(state => ({ ...state.album }))
+    const album = Object.values(albumsObj)
     const onClickHandler = () => {
         history.push(`/addAlbums`);
     }
+    const onClickAlbum = (e) => {
+        history.push(`/albums/${e.target.id}`);
+    }
     return (
-        <div>
+        <div id="albumPageContainer">
             <div>
                 <button id="addPicButton" onClick={onClickHandler}>
                     <PlusIcon className="icon Plus-Icon" />
                 </button>
             </div>
             {
-                list
+                album.map(({ id, title }, i) => (
+                    <div className='IndividualContainer'>
+                        <div className='albumImage' key={i} onClick={onClickAlbum} id={id}></div>
+                        <button onClick={(() => dispatch(deleteAlbums(id)))}>Delete</button>
+                        <button>Edit</button>
+                        <h3 className='titleContainer'>{title}</h3>
+                    </div>
+                ))
             }
         </div>
     )

@@ -40,4 +40,11 @@ router.get("/:username", asyncHandler(async (req, res) => {
     return res.json(albums)
 }))
 
+router.delete("/:id", asyncHandler(async (req, res) => {
+    const id = req.params.id
+    const album = await Album.findByPk(id)
+    await album.destroy()
+    return res.json(album)
+}))
+
 module.exports = router;
