@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import './addAlbum.css';
+import './editAlbumsPage.css';
 import { useHistory } from 'react-router-dom';
-import { postAlbums } from '../../store/albums';
+import { putAlbums } from '../../store/albums';
+import { useParams } from 'react-router-dom/cjs/react-router-dom.min';
 
-function AddAlbum() {
+function EditAlbumsPage() {
     const sessionUser = useSelector(state => state.session.user);
+    const parm = useParams()
     const [title, setTitle] = useState('');
     const history = useHistory();
     const [description, setDisctiption] = useState("");
@@ -19,7 +21,7 @@ function AddAlbum() {
             userId: sessionUser.id
         }
         history.push(`/albums`);
-        return dispatch(postAlbums(payload))
+        return dispatch(putAlbums(parm.id, payload))
     }
     return (
         <div>
@@ -38,10 +40,10 @@ function AddAlbum() {
                         value={description}
                     ></input>
                 </div>
-                <button type="submit">Add Album</button>
+                <button type="submit">Edit Album</button>
             </form>
         </div>
     )
 }
 
-export default AddAlbum;
+export default EditAlbumsPage

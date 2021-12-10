@@ -81,6 +81,7 @@ const picReducer = (state = initialState, action) => {
         case LOAD_PICS: {
             const newState = { ...state };
             action.picture.forEach((element) => {
+                console.log(element, newState)
                 newState[element.id] = element;
             });
             return newState;

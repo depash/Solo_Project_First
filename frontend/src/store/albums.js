@@ -3,6 +3,8 @@ import { csrfFetch } from './csrf';
 const CREATE_ABLUMS = "albums/createAlbums"
 const LOAD_ALBUMS = "albums/loadAlbums"
 const DELETE_ALBUMS = "albums/deleteAlbums"
+const EDIT_ALBUMS = "albums/editAlbums"
+
 const createAlbums = (album) => {
     return {
         type: CREATE_ABLUMS,
@@ -21,6 +23,13 @@ const deleteAlbumsAction = (albums) => {
     return {
         type: DELETE_ALBUMS,
         albums
+    }
+}
+
+const editAlbum = (album) => {
+    return {
+        type: EDIT_ALBUMS,
+        album
     }
 }
 
@@ -54,6 +63,18 @@ export const deleteAlbums = (albumId) => async (dispatch) => {
     }
 }
 
+export const putAlbums = (albumId, albumInfo) => async (dispatch) => {
+    const response = await csrfFetch(`/api/albums/${albumId}`, {
+        method: "PUT",
+        body: JSON.stringify({
+            albumInfo
+        })
+    })
+    const editedAlbum = await response.json()
+    dispatch(editAlbum(editedAlbum))
+    return response;
+}
+
 const initialState = {};
 
 const albumReducer = (state = initialState, action) => {
@@ -77,6 +98,13 @@ const albumReducer = (state = initialState, action) => {
             const newState = { ...state }
             delete newState[action.albums.id];
             return newState
+        }
+        case EDIT_ALBUMS: {
+            const newState = {
+                ...state,
+                [action.album.id]: action.album
+            }
+            return newState;
         }
         default:
             return state

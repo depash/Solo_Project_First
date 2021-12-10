@@ -1,16 +1,21 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-import './singleAlbums.css';
+import './editPicsPage.css';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { postPics } from '../../store/pics';
+import { putPics, getPics } from '../../store/pics';
 
-function AddPicsPage() {
+function EditPicsPage() {
     const sessionUser = useSelector(state => state.session.user);
     const params = useParams();
+    const { albumId, PictureId } = params;
     const dispatch = useDispatch()
     const history = useHistory()
-    const [picture, setPicture] = useState("");
+    useEffect(async () => {
+        await dispatch(getPics(params.id))
+    }, [dispatch])
+    const picsObj = useSelector(state => ({ ...state.pic }))
+    const [picture, setPicture] = useState(picsObj[PictureId].picture);
     const [errors, setErrors] = useState(false)
     useEffect(() => {
         if (picture === "") {
@@ -24,12 +29,12 @@ function AddPicsPage() {
         e.preventDefault();
         const payload = {
             picture,
-            albumId: params.id,
+            albumId,
             userId: sessionUser.id
         }
         if (!errors) {
-            await dispatch(postPics(payload))
-            history.push(`/albums/${params.id}`);
+            await dispatch(putPics(PictureId, payload))
+            history.push(`/albums/${albumId}`);
         }
     }
     return (
@@ -43,10 +48,10 @@ function AddPicsPage() {
                         value={picture}
                     ></input>
                 </div>
-                <button type="submit">Add Picture</button>
+                <button type="submit">Edit Picture</button>
             </form>
         </div>
     )
 }
 
-export default AddPicsPage;
+export default EditPicsPage;

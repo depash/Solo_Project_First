@@ -10,6 +10,8 @@ import AddAlbum from "./components/addAlbumPage";
 import AllAlbums from "./components/albumsPage";
 import AddPicsPage from "./components/addPicsPage";
 import PicPage from "./components/picsPage";
+import EditPicsPage from "./components/editPicsPage";
+import EditAlbumsPage from "./components/editAlbumsPage";
 
 
 
@@ -55,8 +57,14 @@ function App() {
           <Route exact path="/albums/:id">
             <PicPage />
           </Route>
-          <Route path="/albums/:id/newPic">
+          <Route exact path="/albums/:id/newPic">
             <AddPicsPage />
+          </Route>
+          <Route path="/albums/:id/edit">
+            <EditAlbumsPage />
+          </Route>
+          <Route path="/albums/:albumId/pics/:PictureId/edit">
+            <EditPicsPage />
           </Route>
         </Switch>
       )}

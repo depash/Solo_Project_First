@@ -11,7 +11,7 @@ const router = express.Router();
 
 router.post("/", asyncHandler(async (req, res) => {
     const { PicInfo } = req.body
-    console.log(PicInfo)
+    // console.log(PicInfo)
     const makePic = await picture.create(PicInfo)
     return res.json(makePic);
 }))
@@ -20,6 +20,14 @@ router.delete("/:id", asyncHandler(async (req, res) => {
     const id = req.params.id
     const pic = await picture.findByPk(id)
     await pic.destroy()
+    return res.json(pic)
+}))
+
+router.put("/:id", asyncHandler(async (req, res) => {
+    const id = req.params.id
+    const { PicInfo } = req.body;
+    const pic = await picture.findByPk(id)
+    await pic.update(PicInfo)
     return res.json(pic)
 }))
 
