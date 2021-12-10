@@ -30,8 +30,8 @@ function AllAlbums() {
                 </button>
             </div>
             {
-                album.map(({ id, title }, i) => (
-                    <div className='IndividualContainer'>
+                album.map(({ id, title, userId }, i) => (
+                    sessionUser.id == userId && <div className='IndividualContainer'>
                         <div className='albumImage' key={i} onClick={onClickAlbum} id={id}></div>
                         <button onClick={(() => dispatch(deleteAlbums(id)))}>Delete</button>
                         <NavLink to={`/albums/${id}/edit`}><button>Edit</button></NavLink>
