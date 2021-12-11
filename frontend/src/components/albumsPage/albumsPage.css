@@ -8,8 +8,12 @@
 }
 
 #albumPageContainer{
-    display: flex;
-    flex-wrap: wrap;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(4, .5fr);
+    gap: 10px;
 }
 .IndividualContainer{
     width: 140px;
