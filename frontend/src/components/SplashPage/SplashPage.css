@@ -27,13 +27,17 @@
     margin-bottom: .8rem;
 }
 
-#linkContainer{
+
+#splashPageButton{
     background-color: white;
     padding: .7rem;
     border-radius: 5px;
     margin-top: 1rem;
+    font-size: 20px;
+    border: none;
     transition: background-color .5s;
 }
-#linkContainer:hover{
+#splashPageButton:hover{
+    cursor: pointer;
     background-color: rgb(151, 150, 150);
 }

@@ -17,8 +17,8 @@ function SplashPage() {
             <div id="boxContainer">
                 <div id="splashBox">
                     <h1 id="title">Find your inspiration.</h1>
-                    <h3 className="subTitle">Join the Picturocity community</h3>
-                    <div id="linkContainer"><button style={{ color: 'black', fontSize: "2rem" }} onClick={onClickHandler}>Start Now</button></div>
+                    <h3 className="subTitle">Try as Demo User</h3>
+                    <button id="splashPageButton" style={{ color: 'black' }} onClick={onClickHandler}>Demo Login</button>
                 </div>
             </div>
         </div>
