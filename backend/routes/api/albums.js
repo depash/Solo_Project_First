@@ -9,9 +9,25 @@ const { db } = require('../../config');
 const { picture } = require('../../db/models');
 const router = express.Router();
 
-router.post("/", asyncHandler(async (req, res) => {
-    const { albumInfo } = req.body
-    const makeAlbum = await Album.create(albumInfo)
+const validateAlbums = [
+    check('title')
+        .exists({ checkFalsy: true })
+        .isLength({ min: 4 })
+        .withMessage('Please provide a username with at least 4 characters.')
+        .isLength({ max: 10 })
+        .withMessage("The title must be less then 10 characters"),
+    check('description')
+        .exists({ checkFalsy: true }),
+    handleValidationErrors
+];
+
+router.post("/", validateAlbums, asyncHandler(async (req, res) => {
+    const { title, description, userId } = req.body;
+    const makeAlbum = await Album.create({
+        title,
+        description,
+        userId
+    })
     return res.json(makeAlbum);
 }))
 
@@ -48,11 +64,15 @@ router.delete("/:id", asyncHandler(async (req, res) => {
     return res.json(album)
 }))
 
-router.put("/:id", asyncHandler(async (req, res) => {
+router.put("/:id", validateAlbums, asyncHandler(async (req, res) => {
     const id = req.params.id
-    const { albumInfo } = req.body;
+    const { title, description, userId } = req.body;
     const album = await Album.findByPk(id)
-    await album.update(albumInfo)
+    await album.update({
+        title,
+        description,
+        userId
+    })
     return res.json(album)
 }))
 

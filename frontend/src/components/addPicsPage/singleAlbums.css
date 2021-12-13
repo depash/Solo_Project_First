@@ -1,0 +1,14 @@
+.picsFormBackground{
+    height: 100%;
+    background-color: #57b8ff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.PicsForm{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 20px;
+}

@@ -26,7 +26,6 @@ function PicPage() {
     }
     return (
         <div id="PicsPage">
-
             <div>
                 <button id="addPicButton" onClick={onClickHandler}>
                     <PlusIcon className="icon Plus-Icon" />
@@ -36,8 +35,10 @@ function PicPage() {
                 pics.map(({ picture, id, albumId }, i) => (
                     params.id == albumId && <div key={i} class="picContainer">
                         <img className="Pics" src={picture}></img>
-                        {<button id={id} onClick={() => { dispatch(deletePics(id)) }}>Delete</button>}
-                        <NavLink to={`/albums/${albumId}/pics/${id}/edit`}><button id={id} onClick={onClickEditHandler}>Edit</button></NavLink>
+                        <div>
+                            {<button className='imageButtons' id={id} onClick={() => { dispatch(deletePics(id)) }}>Delete</button>}
+                            <NavLink to={`/albums/${albumId}/pics/${id}/edit`}><button className='imageButtons' id={id} onClick={onClickEditHandler}>Edit</button></NavLink>
+                        </div>
                     </div>
                 ))
             }

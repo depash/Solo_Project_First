@@ -1,7 +1,8 @@
 .albumImage{
     width: 140px;
     height: 140px;
-    background-color: aqua;
+    background-image: url("../../images/spring-flowers-1613759017.jpg");
+    object-fit: scale-down;
 }
 .albumImage:hover{
     cursor: pointer;
@@ -13,7 +14,12 @@
     width: 80%;
     display: grid;
     grid-template-columns: repeat(4, .5fr);
+    grid-gap: 10px;
+    grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
     gap: 10px;
+    background-color: cadetblue;
+    justify-items: center;
+    align-items: center;
 }
 .IndividualContainer{
     width: 140px;
