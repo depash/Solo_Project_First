@@ -33,17 +33,17 @@ function AddPicsPage() {
         }
     }
     return (
-        <div>
+        <div className='picsFormBackground'>
             {errors && <h3>please Enter a url</h3>}
-            <form onSubmit={handleSubmit}>
-                <div>
+            <form className='PicsForm' onSubmit={handleSubmit}>
+                <div className='InputContainers'>
                     <label>Photo</label>
                     <input placeholder="URL"
                         onChange={(e) => { setPicture(e.target.value) }}
                         value={picture}
                     ></input>
                 </div>
-                <button type="submit">Add Picture</button>
+                <button className="SubmitButtons" type="submit">Add Picture</button>
             </form>
         </div>
     )

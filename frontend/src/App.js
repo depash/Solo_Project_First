@@ -12,6 +12,7 @@ import AddPicsPage from "./components/addPicsPage";
 import PicPage from "./components/picsPage";
 import EditPicsPage from "./components/editPicsPage";
 import EditAlbumsPage from "./components/editAlbumsPage";
+import AlbumBar from "./components/albumsBar";
 
 
 
@@ -52,10 +53,16 @@ function App() {
             <AddAlbum />
           </Route>
           <Route exact path="/albums">
-            <AllAlbums />
+            <div className="albumBarContiner">
+              <AlbumBar />
+              <AllAlbums />
+            </div>
           </Route>
           <Route exact path="/albums/:id">
-            <PicPage />
+            <div className="albumBarContiner">
+              <AlbumBar />
+              <PicPage />
+            </div>
           </Route>
           <Route exact path="/albums/:id/newPic">
             <AddPicsPage />

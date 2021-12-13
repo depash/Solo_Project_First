@@ -4,6 +4,7 @@ import './editPicsPage.css';
 import { useHistory } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { putPics, getPics } from '../../store/pics';
+import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 
 function EditPicsPage() {
     const sessionUser = useSelector(state => state.session.user);
@@ -11,9 +12,10 @@ function EditPicsPage() {
     const { albumId, PictureId } = params;
     const dispatch = useDispatch()
     const history = useHistory()
+    const location = useLocation()
     useEffect(async () => {
         await dispatch(getPics(params.id))
-    }, [dispatch])
+    }, [dispatch, location])
     const picsObj = useSelector(state => ({ ...state.pic }))
     const [picture, setPicture] = useState(picsObj[PictureId].picture);
     const [errors, setErrors] = useState(false)
@@ -38,17 +40,17 @@ function EditPicsPage() {
         }
     }
     return (
-        <div>
+        <div className='picsFormBackground'>
             {errors && <h3>please Enter a url</h3>}
-            <form onSubmit={handleSubmit}>
-                <div>
+            <form className='PicsForm' onSubmit={handleSubmit}>
+                <div className='InputContainers'>
                     <label>Photo</label>
                     <input placeholder="URL"
                         onChange={(e) => { setPicture(e.target.value) }}
                         value={picture}
                     ></input>
                 </div>
-                <button type="submit">Edit Picture</button>
+                <button className="SubmitButtons" type="submit">Edit Picture</button>
             </form>
         </div>
     )

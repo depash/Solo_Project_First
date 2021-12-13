@@ -24,21 +24,7 @@ function AllAlbums() {
     }
     return (
         <div id="albumPageContainer">
-            <div>
-                <button id="addPicButton" onClick={onClickHandler}>
-                    <PlusIcon className="icon Plus-Icon" />
-                </button>
-            </div>
-            {
-                album.map(({ id, title, userId }, i) => (
-                    sessionUser.id == userId && <div className='IndividualContainer'>
-                        <div className='albumImage' key={i} onClick={onClickAlbum} id={id}></div>
-                        <button onClick={(() => dispatch(deleteAlbums(id)))}>Delete</button>
-                        <NavLink to={`/albums/${id}/edit`}><button>Edit</button></NavLink>
-                        <h3 className='titleContainer'>{title}</h3>
-                    </div>
-                ))
-            }
+
         </div>
     )
 }

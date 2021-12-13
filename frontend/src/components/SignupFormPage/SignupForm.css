@@ -1,0 +1,28 @@
+#SighnUpContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+#SighnUpForm{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    padding: 40px;
+    align-items: center;
+    row-gap: 10px;
+}
+.SighnupFormInputContainer{
+    display: flex;
+    flex-direction: column;
+}
+.SubmitButtons{
+    padding: 15px;
+    border-radius: 5px;
+    border: none;
+    transition: background-color 1s;
+}
+.SubmitButtons:hover{
+    cursor: pointer;
+    background-color: rgb(138, 138, 138);
+}

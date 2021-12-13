@@ -28,36 +28,35 @@ function LoginFormPage() {
     return (
         <div id="formContianer">
             <form id="form" onSubmit={handleSubmit}>
-                <div id="inputsContiner">
+                <div className="inputContianer">
                     <ul>
                         {errors.map((error, idx) => <li key={idx}>{error}</li>)}
                     </ul>
-                    <div className="inputContianer">
-                        <label for="username">
-                            Username or Email
-                        </label>
-                        <input
-                            type="text"
-                            value={credential}
-                            onChange={(e) => setCredential(e.target.value)}
-                            required
-                            name="username"
-                        />
-                    </div>
-                    <div className="inputContianer">
-                        <label for="password">
-                            Password
-                        </label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            required
-                            name="password"
-                        />
-                    </div>
-                    <button type="submit">Log In</button>
+                    <h3>Log in</h3>
+                    <label for="username">
+                        Username or Email
+                    </label>
+                    <input
+                        type="text"
+                        value={credential}
+                        onChange={(e) => setCredential(e.target.value)}
+                        required
+                        name="username"
+                    />
                 </div>
+                <div className="inputContianer">
+                    <label for="password">
+                        Password
+                    </label>
+                    <input
+                        type="password"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                        name="password"
+                    />
+                </div>
+                <button className="SubmitButtons" type="submit">Log In</button>
             </form>
         </div>
     );

@@ -34,10 +34,13 @@ const editAlbum = (album) => {
 }
 
 export const postAlbums = (albumInfo) => async (dispatch) => {
+    const { title, description, userId } = albumInfo
     const response = await csrfFetch('/api/albums', {
         method: 'POST',
         body: JSON.stringify({
-            albumInfo
+            title,
+            description,
+            userId
         })
     })
     const album = await response.json();
@@ -64,10 +67,13 @@ export const deleteAlbums = (albumId) => async (dispatch) => {
 }
 
 export const putAlbums = (albumId, albumInfo) => async (dispatch) => {
+    const { title, description, userId } = albumInfo
     const response = await csrfFetch(`/api/albums/${albumId}`, {
         method: "PUT",
         body: JSON.stringify({
-            albumInfo
+            title,
+            description,
+            userId
         })
     })
     const editedAlbum = await response.json()
